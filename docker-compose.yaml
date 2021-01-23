@@ -1,0 +1,36 @@
+version: "3"
+services:
+  database:
+    image: postgres:13.1
+    restart: always
+    container_name: postgres_1
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_CONTAINER_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql/data/
+    ports:
+      - ${PUBLIC_IP_ADDRESS}:9432:5432
+  scraper:
+    build:
+      context: .
+      dockerfile: containers/scraper.dockerfile
+    restart: always
+    container_name: scraper_1
+    environment:
+      POSTGRES_URL: postgresql+psycopg2://postgres:${POSTGRES_CONTAINER_PASSWORD}@postgres_1:5432/postgres
+    links:
+      - database
+  application:
+    build:
+      context: .
+      dockerfile: containers/application.dockerfile
+    restart: always
+    container_name: application_1
+    environment:
+      POSTGRES_URL: postgresql+psycopg2://postgres:${POSTGRES_CONTAINER_PASSWORD}@postgres_1:5432/postgres
+    ports:
+      - ${PUBLIC_IP_ADDRESS}:8181:8000
+    links:
+      - database
+volumes:
+  database: {}
