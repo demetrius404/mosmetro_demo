@@ -19,8 +19,8 @@ PUBLIC_IP_ADDRESS=127.0.0.1
 В файле `docker-compose.yaml` указаны параметры сборки и запуска следующих контейнеров:
 
 - `database (postgres_1)` - база данных PostgreSQL (публичный порт 9432)
-- `scraper (scraper_1)` -  получения данных с основной страницы новостей 
-  [/press/news](https://www.mosmetro.ru/press/news), интервал опроса 10 минут
+- `scraper (scraper_1)` -  получения данных с [/press/news](https://www.mosmetro.ru/press/news), 
+  интервал опроса 10 минут
 - `application (application_1)` – приложение Flask (публичный порт 8181), запущено через Gunicorn
 
 #### API
