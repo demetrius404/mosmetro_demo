@@ -1,4 +1,4 @@
-### Тестовое задание по созданию API и получения данных с сайта [mosmetro.ru](https://www.mosmetro.ru)
+### Тестовое задание по созданию API и получению данных с сайта [mosmetro.ru](https://www.mosmetro.ru)
 
 Для запуска необходим файл с переменными окружения `.env`
 ```text
@@ -6,8 +6,8 @@ POSTGRES_CONTAINER_PASSWORD=example
 PUBLIC_IP_ADDRESS=127.0.0.1
 ```
 
-`POSTGRES_CONTAINER_PASSWORD` - пароль пользователя postgres 
-`PUBLIC_IP_ADDRESS` - IP адрес интерфейса на котором будут доступны контейнеры
+`POSTGRES_CONTAINER_PASSWORD` - пароль пользователя postgres   
+`PUBLIC_IP_ADDRESS` - IP адрес интерфейса на котором будут доступны контейнеры  
 
 Пример запуска с одновременной сборкой контейнеров:
 ```text
