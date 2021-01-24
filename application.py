@@ -20,7 +20,8 @@ from lib import News
 log = create_logger("application")
 
 log.info("create PostgreSQL session")
-postgres_engine, postgres_connection, postgres_session = create_postgres_session(os.environ["POSTGRES_URL"])
+postgres_engine, postgres_connection, postgres_session = create_postgres_session(os.environ["POSTGRES_URL"], 15)
+log.info("create table if required")
 News.__table__.create(postgres_engine, checkfirst=True)
 postgres_connection.close()
 log.info("close PostgreSQL session")

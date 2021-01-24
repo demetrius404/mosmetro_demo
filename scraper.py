@@ -86,8 +86,6 @@ def scrape_news_list(delay: Int = 2) -> None:
 
     log.info("create PostgreSQL session")
     postgres_engine, postgres_connection, postgres_session = create_postgres_session(os.environ["POSTGRES_URL"])
-    # create table if required
-    News.__table__.create(postgres_engine, checkfirst=True)
 
     content = web_session_get(web_session, "".join([basic_url, "/press/news/"]))
     if content:
@@ -102,8 +100,7 @@ def scrape_news_list(delay: Int = 2) -> None:
             news_exists = postgres_session.query(News).filter(where).first()
             if not news_exists:
                 # extra public date
-                content = web_session_get(web_session, payload["news_url"])
-                dom_news = html.fromstring(content)
+                dom_news = html.fromstring(web_session_get(web_session, payload["news_url"]))
                 raw_public_date = dom_news.xpath("//div[@class='pagetitle__content-date']/text()")[0]
                 payload["public_date"] = parse_news_public_date(raw_public_date)
                 log.info("insert")
@@ -120,13 +117,26 @@ def scrape_news_list(delay: Int = 2) -> None:
     postgres_connection.close()
 
 
+def init_database(delay: Int = 15):
+    log.info("create PostgreSQL session")
+    postgres_engine, postgres_connection, postgres_session = create_postgres_session(os.environ["POSTGRES_URL"], delay)
+    log.info("create table if required")
+    News.__table__.create(postgres_engine, checkfirst=True)
+    postgres_connection.close()
+    log.info("close PostgreSQL session")
+    postgres_connection.close()
+
+
 if __name__ == "__main__":
 
-    # first round
-    scrape_news_list(1)  # delay 1s
+    init_database(15)
 
-    # schedule every n minutes
-    schedule.every(10).minutes.do(scrape_news_list, 5)  # delay 5s
+    log.info("first round")
+    scrape_news_list(1)  # step delay 1s
+
+    minutes = 10
+    log.info("schedule every {0} minutes".format(minutes))
+    schedule.every(10).minutes.do(scrape_news_list, 5)  # step delay 5s
 
     while True:
         schedule.run_pending()
