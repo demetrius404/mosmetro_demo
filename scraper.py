@@ -3,7 +3,6 @@ import os
 import json
 import lxml.html as html
 
-import logging
 import schedule
 
 from datetime import datetime
@@ -17,6 +16,7 @@ from typing import Dict
 from typing import Union
 
 from lib import create_postgres_session
+from lib import create_logger
 from lib import News
 from lib.typing_alias import Str
 from lib.typing_alias import Bytes
@@ -24,13 +24,7 @@ from lib.typing_alias import Int
 from lib.typing_alias import Date
 
 # logging
-log = logging.getLogger("scraper")
-log.setLevel(logging.DEBUG)
-stream_handler = logging.StreamHandler()
-stream_handler.setLevel(logging.DEBUG)
-formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s", datefmt="%Y-%m-%dT%H:%M:%S")
-stream_handler.setFormatter(formatter)
-log.addHandler(stream_handler)
+log = create_logger("scraper")
 
 
 def parse_news_block(element: Element, basic_url: Str) -> Union[Dict, None]:

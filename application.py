@@ -1,5 +1,4 @@
 import os
-import logging
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -14,16 +13,11 @@ from datetime import timedelta
 from lib.typing_alias import Int
 from lib.typing_alias import Bool
 from lib import create_postgres_session
+from lib import create_logger
 from lib import News
 
 # logging
-log = logging.getLogger("application")
-log.setLevel(logging.DEBUG)
-stream_handler = logging.StreamHandler()
-stream_handler.setLevel(logging.DEBUG)
-formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s", datefmt="%Y-%m-%dT%H:%M:%S")
-stream_handler.setFormatter(formatter)
-log.addHandler(stream_handler)
+log = create_logger("application")
 
 log.info("create PostgreSQL session")
 postgres_engine, postgres_connection, postgres_session = create_postgres_session(os.environ["POSTGRES_URL"])
