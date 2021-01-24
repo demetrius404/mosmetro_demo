@@ -26,7 +26,7 @@ postgres_connection.close()
 log.info("close PostgreSQL session")
 postgres_connection.close()
 
-log.info("starting Flask application")
+log.info("create Flask application")
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
