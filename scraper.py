@@ -80,7 +80,7 @@ def web_session_get(session: Session, url: Str) -> Union[Bytes, None]:
         return None
 
 
-def scrape_news_list(delay: Int = 2):
+def scrape_news_list(delay: Int = 2) -> None:
 
     basic_url = "https://www.mosmetro.ru"
 
