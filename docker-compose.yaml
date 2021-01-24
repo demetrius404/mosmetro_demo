@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_CONTAINER_PASSWORD}
     volumes:
-      - database:/var/lib/postgresql/data/
+      - database_data:/var/lib/postgresql/data/
     ports:
       - ${PUBLIC_IP_ADDRESS}:9432:5432
   scraper:
@@ -33,4 +33,4 @@ services:
     links:
       - database
 volumes:
-  database: {}
+  database_data: {}
