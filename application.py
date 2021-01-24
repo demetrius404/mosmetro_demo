@@ -69,10 +69,8 @@ def metro_news():
     for item in news:
         _news = {
             "news_title": item.news_title,
-            "public_date": item.public_date.strftime("%Y-%m-%d"),
-            "news_url": item.news_url,
             "image_url": item.image_url,
-            "parse_date": item.parse_date.strftime("%Y-%m-%d")
+            "public_date": item.public_date.strftime("%Y-%m-%d")
         }
         items.append(_news)
     return jsonify(news=items, period=[period_start.strftime("%Y-%m-%d"), period_end.strftime("%Y-%m-%d")]), 200

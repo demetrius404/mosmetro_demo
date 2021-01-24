@@ -39,10 +39,8 @@ PUBLIC_IP_ADDRESS=127.0.0.1
 {
     "news": [
         {
-            "image_url": "https://www.mosmetro.ru/.../f2bfaefe5e7c2576a746105835d510f3.jpg",
             "news_title": "Карта «Тройка» заработает в вашем смартфоне в этом году",
-            "news_url":"https://www.mosmetro.ru/press/news/3827/",
-            "parse_date":"2021-01-23",
+            "image_url": "https://www.mosmetro.ru/.../f2bfaefe5e7c2576a746105835d510f3.jpg",
             "public_date":"2021-01-22"
         }, {
        ...
