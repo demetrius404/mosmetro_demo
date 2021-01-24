@@ -60,11 +60,9 @@ def parse_news_public_date(raw_date: Str) -> Union[Date, None]:
         "декабря": 12
     }
     day, month, year = raw_date.strip().lower().split(" ")
-    if month in months:
-        month = months[month]
     try:
-        return date(int(year), month, int(day))
-    except (ValueError, TypeError):
+        return date(int(year), months[month], int(day))
+    except (ValueError, TypeError, KeyError):
         return None
 
 
