@@ -43,7 +43,9 @@ GET /metro/news?days={0}
             "image_url": "https://www.mosmetro.ru/.../f2bfaefe5e7c2576a746105835d510f3.jpg",
             "public_date":"2021-01-22"
         }, {
-       ...
+            
+            ...
+            
         }
     ],
     "period": ["2021-01-23","2021-01-13"]
