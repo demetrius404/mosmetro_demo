@@ -5,29 +5,26 @@
 POSTGRES_CONTAINER_PASSWORD=example
 PUBLIC_IP_ADDRESS=127.0.0.1
 ```
-
-`POSTGRES_CONTAINER_PASSWORD` - пароль пользователя postgres   
-`PUBLIC_IP_ADDRESS` - IP адрес интерфейса на котором будут доступны контейнеры  
+`POSTGRES_CONTAINER_PASSWORD` - пароль пользователя postgres  
+`PUBLIC_IP_ADDRESS` - IP адрес интерфейса на котором будут доступны контейнеры
 
 Пример запуска с одновременной сборкой контейнеров:
 ```text
 > docker-compose up --build
 ```
 
-
 #### Контейнеры
-В файле `docker-compose.yaml` указаны параметры сборки и запуска следующих контейнеров:
 
+В файле `docker-compose.yaml` указаны параметры сборки и запуска следующих контейнеров:
 - `database (postgres_1)` - база данных PostgreSQL (публичный порт 9432)
-- `scraper (scraper_1)` -  получения данных [/press/news](https://www.mosmetro.ru/press/news), 
+- `scraper (scraper_1)` - получения данных [/press/news](https://www.mosmetro.ru/press/news), 
   интервал опроса 10 минут
 - `application (application_1)` – приложение Flask (публичный порт 8181), запущено через Gunicorn
 
 #### API
-`GET /metro/news?days=N` 
 
-Получение списка ссылок на новости за N дней (начиная c текущей даты), значение по умолчанию равно 5
-
+`GET /metro/news?days={0}`
+Получение списка ссылок на новости за `{0}` дней (начиная с текущей даты), значение по умолчанию равно 5
 
 Пример выполнения запроса с помощью curl:
 ```text
@@ -51,6 +48,7 @@ PUBLIC_IP_ADDRESS=127.0.0.1
 ```
 
 #### Тест
+
 Простой тест производительности с постепенно возрастающим профилем нагрузки  
 Процессы: 5  
 Запросы: 100-1500  
